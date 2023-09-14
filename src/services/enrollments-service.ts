@@ -1,19 +1,44 @@
 import { Address, Enrollment } from '@prisma/client';
 import { request } from '@/utils/request';
-import { notFoundError } from '@/errors';
+import { notFoundError, invalidDataError } from '@/errors';
 import { addressRepository, CreateAddressParams, enrollmentRepository, CreateEnrollmentParams } from '@/repositories';
 import { exclude } from '@/utils/prisma-utils';
 
 // TODO - Receber o CEP por parâmetro nesta função.
-async function getAddressFromCEP(cep: any) {
+
+type AddressByCep = {
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+};
+
+async function validCep(cep: string) {
   console.log(cep);
-  // FIXME: está com CEP fixo!
-  const result = await request.get(`${process.env.VIA_CEP_API}/37440000/json/`);
+  console.log(typeof cep);
+  console.log(cep.length);
+  const validateZip = /(^\d{8}$)|(^\d{5}[-]\d{3}$)/;
+  if (!validateZip.test(cep)) throw invalidDataError('Must be a valid format');
 
-  // TODO: Tratar regras de negócio e lanças eventuais erros
-
-  // FIXME: não estamos interessados em todos os campos
+  const result = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
+  if (result.data.erro) throw invalidDataError('Must be a valid cep' + ` ${cep}`);
   return result.data;
+}
+
+async function getAddressFromCEP(cep: string): Promise<AddressByCep> {
+  const result = await validCep(cep);
+
+  const { logradouro, complemento, bairro, localidade, uf } = result;
+
+  const address = {
+    logradouro,
+    complemento,
+    bairro,
+    cidade: localidade,
+    uf,
+  };
+  return address;
 }
 
 async function getOneWithAddressByUserId(userId: number): Promise<GetOneWithAddressByUserIdResult> {
@@ -45,6 +70,7 @@ async function createOrUpdateEnrollmentWithAddress(params: CreateOrUpdateEnrollm
   enrollment.birthday = new Date(enrollment.birthday);
   const address = getAddressForUpsert(params.address);
 
+  await validCep(params.address.cep);
   // TODO - Verificar se o CEP é válido antes de associar ao enrollment.
 
   const newEnrollment = await enrollmentRepository.upsert(params.userId, enrollment, exclude(enrollment, 'userId'));
