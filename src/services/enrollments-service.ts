@@ -1,6 +1,6 @@
 import { Address, Enrollment } from '@prisma/client';
 import { request } from '@/utils/request';
-import { notFoundError, invalidDataError } from '@/errors';
+import { invalidDataError } from '@/errors';
 import { addressRepository, CreateAddressParams, enrollmentRepository, CreateEnrollmentParams } from '@/repositories';
 import { exclude } from '@/utils/prisma-utils';
 
@@ -15,9 +15,6 @@ type AddressByCep = {
 };
 
 async function validCep(cep: string) {
-  console.log(cep);
-  console.log(typeof cep);
-  console.log(cep.length);
   const validateZip = /(^\d{8}$)|(^\d{5}[-]\d{3}$)/;
   if (!validateZip.test(cep)) throw invalidDataError('Must be a valid format');
 
@@ -44,7 +41,7 @@ async function getAddressFromCEP(cep: string): Promise<AddressByCep> {
 async function getOneWithAddressByUserId(userId: number): Promise<GetOneWithAddressByUserIdResult> {
   const enrollmentWithAddress = await enrollmentRepository.findWithAddressByUserId(userId);
 
-  if (!enrollmentWithAddress) throw notFoundError();
+  if (!enrollmentWithAddress) throw invalidDataError('There is no enrollment for the user');
 
   const [firstAddress] = enrollmentWithAddress.Address;
   const address = getFirstAddress(firstAddress);
