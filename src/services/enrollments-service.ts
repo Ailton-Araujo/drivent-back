@@ -10,13 +10,14 @@ type AddressByCep = {
   logradouro: string;
   complemento: string;
   bairro: string;
-  cidade: string;
+  localidade?: string;
+  cidade?: string;
   uf: string;
 };
 
-async function validCep(cep: string) {
+async function validCep(cep: string): Promise<AddressByCep> {
   const validateZip = /(^\d{8}$)|(^\d{5}[-]\d{3}$)/;
-  if (!validateZip.test(cep)) throw invalidDataError('Must be a valid format');
+  if (!validateZip.test(cep)) throw invalidDataError('CEP Must be a valid format');
 
   const result = await request.get(`${process.env.VIA_CEP_API}/${cep}/json/`);
   if (result.data.erro) throw invalidDataError('Must be a valid cep' + ` ${cep}`);
