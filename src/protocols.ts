@@ -26,3 +26,12 @@ export type AddressEnrollment = {
 export type CEP = {
   cep: string;
 };
+
+export type AddressByCep = {
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade?: string;
+  cidade?: string;
+  uf: string;
+};

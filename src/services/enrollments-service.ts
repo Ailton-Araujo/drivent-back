@@ -3,17 +3,7 @@ import { request } from '@/utils/request';
 import { invalidDataError } from '@/errors';
 import { addressRepository, CreateAddressParams, enrollmentRepository, CreateEnrollmentParams } from '@/repositories';
 import { exclude } from '@/utils/prisma-utils';
-
-// TODO - Receber o CEP por parâmetro nesta função.
-
-type AddressByCep = {
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade?: string;
-  cidade?: string;
-  uf: string;
-};
+import { AddressByCep } from '@/protocols';
 
 async function validCep(cep: string): Promise<AddressByCep> {
   const validateZip = /(^\d{8}$)|(^\d{5}[-]\d{3}$)/;
