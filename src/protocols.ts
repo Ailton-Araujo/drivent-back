@@ -12,15 +12,7 @@ export type RequestError = {
 };
 
 export type ViaCEPAddressError = {
-  error: boolean;
-};
-
-export type AddressEnrollment = {
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  cidade: string;
-  uf: string;
+  error: boolean | string;
 };
 
 export type CEP = {
@@ -34,4 +26,15 @@ export type AddressByCep = {
   localidade?: string;
   cidade?: string;
   uf: string;
+};
+
+export type CreatePaymentBody = {
+  ticketId: number;
+  cardData: {
+    issuer: string;
+    number: number;
+    name: string;
+    expirationDate: Date;
+    cvv: number;
+  };
 };

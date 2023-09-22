@@ -31,3 +31,27 @@ export const enrollmentRepository = {
   findWithAddressByUserId,
   upsert,
 };
+
+type Coisa = {
+  token: string;
+};
+
+export function teste(data: Coisa) {
+  const { token } = data;
+  return prisma.enrollment.findFirst({
+    where: {
+      AND: {
+        User: {
+          AND: {
+            Session: {
+              some: {
+                token: token,
+              },
+            },
+          },
+        },
+      },
+    },
+    select: { id: true, User: { select: { id: true } } },
+  });
+}
