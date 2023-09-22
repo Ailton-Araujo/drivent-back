@@ -32,9 +32,13 @@ export type CreatePaymentBody = {
   ticketId: number;
   cardData: {
     issuer: string;
-    number: number;
+    number: string;
     name: string;
-    expirationDate: Date;
-    cvv: number;
+    expirationDate: string;
+    cvv: string;
   };
+};
+
+export type TicketId = {
+  ticketId: string | number;
 };

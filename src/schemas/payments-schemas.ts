@@ -2,12 +2,12 @@ import Joi from 'joi';
 import { CreatePaymentBody } from '@/protocols';
 
 export const paymentsSchema = Joi.object<CreatePaymentBody>({
-  ticketId: Joi.number().integer().required(),
+  ticketId: Joi.number().required(),
   cardData: Joi.object({
     issuer: Joi.string().required(),
-    number: Joi.number().integer().required(),
+    number: Joi.string().required(),
     name: Joi.string().required(),
-    expirationDate: Joi.date().required(),
-    cvv: Joi.number().integer().required(),
+    expirationDate: Joi.string().required(),
+    cvv: Joi.string().required(),
   }).required(),
 });
