@@ -1,3 +1,5 @@
+import { Payment, Ticket } from '@prisma/client';
+
 export type ApplicationError = {
   name: string;
   message: string;
@@ -26,19 +28,4 @@ export type AddressByCep = {
   localidade?: string;
   cidade?: string;
   uf: string;
-};
-
-export type CreatePaymentBody = {
-  ticketId: number;
-  cardData: {
-    issuer: string;
-    number: string;
-    name: string;
-    expirationDate: string;
-    cvv: string;
-  };
-};
-
-export type TicketId = {
-  ticketId: string | number;
 };
