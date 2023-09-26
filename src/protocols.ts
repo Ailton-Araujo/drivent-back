@@ -29,3 +29,18 @@ export type AddressByCep = {
   cidade?: string;
   uf: string;
 };
+
+export type CreatePaymentBody = {
+  ticketId: number;
+  cardData: {
+    issuer: string;
+    number: string;
+    name: string;
+    expirationDate: string;
+    cvv: string;
+  };
+};
+
+export type TicketId = {
+  ticketId: string | number;
+};
