@@ -12,3 +12,6 @@ export * from './invalid-cep-error';
 export * from './ticket-not-found-error';
 export * from './ticket-type-not-found.error';
 export * from './ticket-unauthorized-user-error';
+export * from './hotels-not-found-error';
+export * from './ticket-not-paid-error';
+export * from './ticket-not-offer-hotel-error';

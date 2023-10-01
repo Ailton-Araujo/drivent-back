@@ -42,3 +42,7 @@ export type CreatePaymentBody = {
 export type TicketId = {
   ticketId: string | number;
 };
+
+export type HotelId = {
+  hotelId: string | number;
+};

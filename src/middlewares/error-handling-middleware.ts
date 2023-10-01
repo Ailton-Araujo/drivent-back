@@ -66,6 +66,18 @@ export function handleApplicationErrors(
     return res.sendStatus(httpStatus.NOT_FOUND);
   }
 
+  if (err.name === 'ticketNotPaidError') {
+    return res.sendStatus(httpStatus.PAYMENT_REQUIRED);
+  }
+
+  if (err.name === 'ticketNotOfferHotel') {
+    return res.sendStatus(httpStatus.PAYMENT_REQUIRED);
+  }
+
+  if (err.name === 'hotelsNotFoundError') {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+
   if (err.name === 'InvalidCEPError') {
     return res.status(httpStatus.BAD_REQUEST).send({
       message: err.message,

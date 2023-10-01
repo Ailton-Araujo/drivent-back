@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import httpStatus from 'http-status';
 import { AuthenticatedRequest } from '@/middlewares';
-import { paymentService } from '@/services/payments-service';
+import { paymentService } from '@/services/';
 import { CreatePaymentBody, TicketId } from '@/protocols';
 import { invalidDataError } from '@/errors';
 
