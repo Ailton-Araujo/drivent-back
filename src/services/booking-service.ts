@@ -45,7 +45,7 @@ async function updateBooking(userId: number, bookingId: number, roomId: number) 
   if (room.capacity === room._count.Booking) throw roomMaxCapacityError();
 
   const booking = await bookingRepository.getBooking(userId);
-  if (!booking) throw bookingNotFoundError();
+  if (!booking) throw bookingForbiddenError('User does not have a reservation');
 
   const newBooking = await bookingRepository.updateBooking(bookingId, roomId);
   return { bookingId: newBooking.id };

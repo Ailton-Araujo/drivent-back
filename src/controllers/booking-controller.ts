@@ -14,7 +14,7 @@ export async function createBooking(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
   const { roomId } = req.body as BookingBody;
   const result = await bookingService.createBooking(userId, roomId);
-  return res.status(httpStatus.CREATED).send(result);
+  return res.status(httpStatus.OK).send(result);
 }
 
 export async function updateBooking(req: AuthenticatedRequest, res: Response) {

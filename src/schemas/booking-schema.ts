@@ -6,5 +6,5 @@ export const bookingBodySchema = Joi.object<BookingBody>({
 });
 
 export const bookingParamsSchema = Joi.object<BookingParams>({
-  bookingId: Joi.number().integer(),
+  bookingId: Joi.number().integer().required(),
 });
