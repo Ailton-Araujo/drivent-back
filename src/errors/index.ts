@@ -15,3 +15,8 @@ export * from './ticket-unauthorized-user-error';
 export * from './hotels-not-found-error';
 export * from './ticket-not-paid-error';
 export * from './ticket-not-offer-hotel-error';
+export * from './booking-not-found-error';
+export * from './booking-already-exist-error';
+export * from './booking-forbidden-error';
+export * from './room-not-found-error';
+export * from './room-max-capacity-error';

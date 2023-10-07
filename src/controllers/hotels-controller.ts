@@ -2,7 +2,7 @@ import { Response } from 'express';
 import httpStatus from 'http-status';
 import { AuthenticatedRequest } from '@/middlewares';
 import { hotelsService } from '@/services/';
-import { HotelId } from '@/protocols';
+import { HotelParams } from '@/protocols';
 
 export async function getHotels(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
@@ -12,7 +12,7 @@ export async function getHotels(req: AuthenticatedRequest, res: Response) {
 
 export async function getHotelById(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  const { hotelId } = req.params as HotelId;
+  const { hotelId } = req.params as HotelParams;
   const result = await hotelsService.getHotelById(userId, Number(hotelId));
   return res.status(httpStatus.OK).send(result);
 }

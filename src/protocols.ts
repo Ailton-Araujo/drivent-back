@@ -43,6 +43,14 @@ export type TicketId = {
   ticketId: string | number;
 };
 
-export type HotelId = {
+export type HotelParams = {
   hotelId: string | number;
+};
+
+export type BookingBody = {
+  roomId: number;
+};
+
+export type BookingParams = {
+  bookingId: string | number;
 };

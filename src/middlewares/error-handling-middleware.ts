@@ -78,6 +78,26 @@ export function handleApplicationErrors(
     return res.sendStatus(httpStatus.NOT_FOUND);
   }
 
+  if (err.name === 'bookingNotFoundError') {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+
+  if (err.name === 'roomNotFoundError') {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+
+  if (err.name === 'roomMaxCapacityError') {
+    return res.sendStatus(httpStatus.FORBIDDEN);
+  }
+
+  if (err.name === 'bookingAlreadyExistError') {
+    return res.sendStatus(httpStatus.FORBIDDEN);
+  }
+
+  if (err.name === 'bookingForbiddenError') {
+    return res.sendStatus(httpStatus.FORBIDDEN);
+  }
+
   if (err.name === 'InvalidCEPError') {
     return res.status(httpStatus.BAD_REQUEST).send({
       message: err.message,
