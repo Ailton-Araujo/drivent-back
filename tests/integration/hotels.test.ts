@@ -3,9 +3,15 @@ import faker from '@faker-js/faker';
 import httpStatus from 'http-status';
 import * as jwt from 'jsonwebtoken';
 import { TicketStatus } from '@prisma/client';
-import { createEnrollmentWithAddress, createUser, createTicketType, createTicket } from '../factories';
+import {
+  createEnrollmentWithAddress,
+  createUser,
+  createTicketType,
+  createTicket,
+  createHotel,
+  createHotelRooms,
+} from '../factories';
 import { cleanDb, generateValidToken } from '../helpers';
-import { createHotel, createHotelRooms } from '../factories/hotels-factory';
 import app, { init } from '@/app';
 
 beforeAll(async () => {
