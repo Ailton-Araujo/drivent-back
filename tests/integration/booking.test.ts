@@ -9,7 +9,6 @@ import {
   createTicketType,
   createTicket,
   createHotel,
-  createHotelRooms,
   createHotelSingleRoom,
   createBooking,
 } from '../factories';

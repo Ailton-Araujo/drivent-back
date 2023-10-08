@@ -9,8 +9,8 @@ async function findTicketById(id: number) {
   return prisma.ticket.findUnique({ where: { id }, include: { Enrollment: true, TicketType: true } });
 }
 
-async function findTicketByEnrollmentId(enrollmentId: number) {
-  return prisma.ticket.findUnique({ where: { enrollmentId }, include: { Enrollment: true, TicketType: true } });
+async function findTicketByEnrollmentId(enrollmentId: number): Promise<TicketAndType> {
+  return prisma.ticket.findUnique({ where: { enrollmentId }, include: { TicketType: true } });
 }
 
 async function findTicketTypes(): Promise<TicketType[]> {

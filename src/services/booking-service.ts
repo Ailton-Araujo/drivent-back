@@ -1,16 +1,11 @@
 import {
   bookingNotFoundError,
-  enrollmentNotFoundError,
-  hotelsNotFoundError,
-  ticketNotFoundError,
-  ticketNotPaidError,
-  ticketNotOfferHotel,
   roomNotFoundError,
   roomMaxCapacityError,
   bookingAlreadyExistError,
   bookingForbiddenError,
 } from '@/errors';
-import { enrollmentRepository, hotelsRepository, ticketRepository, bookingRepository } from '@/repositories';
+import { enrollmentRepository, ticketRepository, bookingRepository } from '@/repositories';
 
 async function getBooking(userId: number) {
   const booking = await bookingRepository.getBooking(userId);
